@@ -1,27 +1,20 @@
-// use clap::Parser;
-// diesel::{sqlite::{SqliteConnection}};
+use diesel::SqliteConnection;
+use diesel::prelude::*;
+use dotenvy::dotenv;
+use std::env;
 
-// use yew::{prelude::*, Callback};
-// use web_sys::{Event, InputEvent, HtmlInputElement};
-// use wasm_bindgen::{JsCast, UnwrapThrowExt};
+// fn establish_connection() -> SqliteConnection {
+//     dotenv().ok();
 
-// /// Simple program to greet a person
-// #[derive(Parser, Debug)]
-// #[command(author, version, about, long_about = None)]
-// struct Args {
-//     /// Name of the person to greet
-//     #[arg(short, long)]
-//     name: String,
-
-//     /// Number of times to greet
-//     #[arg(short, long, default_value_t = 1)]
-//     count: u8,
+//     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL unset");
+//     SqliteConnection::establish(&database_url)
+//         .unwrap_or_else(|_| panic!("failed to connect to {}", database_url))
+//     println!("successfully established connection to {}", database_url);
 // }
 
 fn main() {
-    // let args = Args::parse();
-
-    // for _ in 0..args.count {
-    //     println!("Hello {}!", args.name)
-    // }
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL unset");
+    let conn = SqliteConnection::establish(&database_url)
+        .unwrap_or_else(|_| panic!("failed to connect to {}", database_url));
+    println!("successfully established connection to {}", database_url);
 }

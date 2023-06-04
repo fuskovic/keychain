@@ -2,9 +2,9 @@
 
 diesel::table! {
     keychains (id) {
-        id -> Nullable<Integer>,
+        id -> Integer,
         name -> Text,
-        created_at -> Nullable<Timestamp>,
-        updated_at -> Nullable<Timestamp>,
+        created_at -> Timestamp,
+        updated_at -> Timestamp,
     }
 }
