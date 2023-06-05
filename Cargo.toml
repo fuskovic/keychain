@@ -10,3 +10,7 @@ clap = { version = "4.3.1", features = ["derive"] }
 diesel = { version = "2.1.0", features = ["sqlite", "chrono"] }
 dotenvy = "0.15.7"
 time = "0.3.21"
+
+[[bin]]
+name = "keychain"
+path = "src/main.rs"

@@ -1,26 +1,30 @@
-use models::{NewKeychain, Keychain};
-use db::{open};
+use diesel::prelude::*;
+use crate::models::{NewKeychain, Keychain};
+use crate::db::{open};
 
 pub fn create_keychain(kc: NewKeychain) {
-    let conn = open();
-    diesel.insert_into(keychains)
+    use crate::schema::keychains::dsl::*;
+    let conn = &mut open();
+    diesel::insert_into(keychains)
         .values(&kc)
         .execute(conn)
-        .expect("failed to insert keychain")
+        .expect("failed to insert keychain");
 }
 
 pub fn update_keychain(kc: Keychain) {
-    let conn = open();
-    diesel.update(keychains.find(kc.id))
+    use crate::schema::keychains::dsl::*;
+    let conn = &mut open();
+    diesel::update(keychains.find(kc.id))
         .set(&kc)
         .execute(conn)
-        .expect("failed to update keychain")
+        .expect("failed to update keychain");
 }
 
 pub fn list_keychains() {
-    let conn = open();
-    let results = keychains.load::<Keychain>(&conn);
+    use crate::schema::keychains::dsl::*;
+    let conn = &mut open();
+    let results = keychains.load::<Keychain>(conn);
     for kc in results {
-        println!("{:?}", kc)
+        println!("{:?}", kc);
     }
 }
