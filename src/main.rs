@@ -1,20 +1,12 @@
-use diesel::SqliteConnection;
-use diesel::prelude::*;
-use dotenvy::dotenv;
-use std::env;
-
-// fn establish_connection() -> SqliteConnection {
-//     dotenv().ok();
-
-//     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL unset");
-//     SqliteConnection::establish(&database_url)
-//         .unwrap_or_else(|_| panic!("failed to connect to {}", database_url))
-//     println!("successfully established connection to {}", database_url);
-// }
+pub mod args;
+use args::{KeychainArgs, KeychainSubcommand};
+use clap::Parser;
 
 fn main() {
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL unset");
-    let conn = SqliteConnection::establish(&database_url)
-        .unwrap_or_else(|_| panic!("failed to connect to {}", database_url));
-    println!("successfully established connection to {}", database_url);
+    let _args = KeychainArgs::parse();
+    match &_args.command {
+        KeychainSubcommand::Create (input) => {
+            println!("{}", input.name)
+        }
+    }
 }
