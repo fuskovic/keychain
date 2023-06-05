@@ -15,6 +15,10 @@ pub struct KeychainArgs {
 pub enum KeychainSubcommand {
     // Create a new keychain
     Create(Keychain),
+    // List existing keychains
+    List(Keychain),
+    // Update/rename existing keychain
+    Update(Keychain),
 }
 
 #[derive(Debug, Args)]
