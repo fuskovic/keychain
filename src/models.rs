@@ -1,4 +1,5 @@
 use diesel::{prelude::*};
+use chrono::{NaiveDateTime};
 
 #[derive(Debug, Queryable, Selectable)]
 #[diesel(table_name = crate::schema::keychains)]
@@ -6,8 +7,8 @@ use diesel::{prelude::*};
 pub struct Keychain {
     pub id: i32,
     pub name: String,
-    pub created_at: chrono::NaiveDateTime,
-    pub updated_at: chrono::NaiveDateTime,
+    pub created_at: NaiveDateTime,
+    pub updated_at: NaiveDateTime,
 }
 
 #[derive(Debug, Insertable)]
@@ -23,4 +24,5 @@ pub struct NewKeychain<'a> {
 pub struct UpdateKeychain<'a> {
     pub id: &'a i32,
     pub name: &'a String,
+    pub updated_at: Option<NaiveDateTime>,
 }

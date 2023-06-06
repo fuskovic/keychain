@@ -21,7 +21,9 @@ fn main() {
             create_keychain(NewKeychain { name })
         }
         Command::Update {id, name} => {
-            update_keychain(UpdateKeychain { id, name })
+            update_keychain(UpdateKeychain { id, name, 
+                updated_at: Some(chrono::offset::Local::now().naive_local()) ,
+            })
         }
         Command::List {} => {
             list_keychains()
