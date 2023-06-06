@@ -1,3 +1,4 @@
 /target
 .env
 rust-keychain.db
+.vscode/*
