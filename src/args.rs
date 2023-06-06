@@ -8,17 +8,26 @@ use clap:: {
 #[clap(author, version, about)]
 pub struct KeychainArgs {
     #[clap(subcommand)]
-    pub command: KeychainSubcommand,
+    pub command: Command,
 }
 
 #[derive(Debug, Subcommand)]
-pub enum KeychainSubcommand {
+pub enum Command {
     // Create a new keychain
-    Create(Keychain),
+    Create {
+        name: String,
+    },
     // List existing keychains
-    List(Keychain),
+    List{},
     // Update/rename existing keychain
-    Update(Keychain),
+    Update {
+        id:     i32,
+        name:   String,
+    },
+    // Delete an existing keychain
+    Delete {
+        name: String,
+    }
 }
 
 #[derive(Debug, Args)]

@@ -4,31 +4,30 @@ mod models;
 mod schema;
 mod ops;
 
-use args::{KeychainArgs, KeychainSubcommand};
+use args::{KeychainArgs, Command};
 use clap::Parser;
-use ops::keychain_ops::update_keychain;
-use crate::ops::keychain_ops::{create_keychain, list_keychains};
+use crate::ops::keychain_ops::{
+    create_keychain, 
+    update_keychain, 
+    list_keychains,
+    delete_keychain
+};
 use models::{NewKeychain, UpdateKeychain};
 
 fn main() {
     let _args = KeychainArgs::parse();
     match &_args.command {
-        KeychainSubcommand::Create (input) => {
-            create_keychain(NewKeychain {
-                name: &input.name 
-            })
+        Command::Create { name } => {
+            create_keychain(NewKeychain { name })
         }
-        KeychainSubcommand::Update (input) => {
-            update_keychain(UpdateKeychain {
-                // TODO: KeychainSubcommand doesn't support tuple enums so all
-                // the subcommands are currently using the same arg input shape
-                // with all the same requirements. Figure out how to solve for this.
-                id:     &123,
-                name:   &input.name
-            })
+        Command::Update {id, name} => {
+            update_keychain(UpdateKeychain { id, name })
         }
-        KeychainSubcommand::List (_) => {
+        Command::List {} => {
             list_keychains()
+        }
+        Command::Delete { name } => {
+            delete_keychain(name.to_string())
         }
     }
 }

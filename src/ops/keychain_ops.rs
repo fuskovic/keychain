@@ -24,3 +24,10 @@ pub fn list_keychains() {
     let results = keychains.load::<Keychain>(conn);
     println!("{:?}", results);
 }
+
+pub fn delete_keychain(_name: String) {
+    let conn = &mut open();
+    diesel::delete(keychains.filter(name.eq(_name)))
+        .execute(conn)
+        .expect("failed to delete keychain");
+}
