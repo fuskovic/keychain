@@ -1,8 +1,9 @@
 use diesel::{prelude::*};
 use chrono::{NaiveDateTime};
+use crate::store::schema::keychains;
 
 #[derive(Debug, Queryable, Selectable)]
-#[diesel(table_name = crate::schema::keychains)]
+#[diesel(table_name = keychains)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct Keychain {
     pub id: i32,
@@ -12,17 +13,17 @@ pub struct Keychain {
 }
 
 #[derive(Debug, Insertable)]
-#[diesel(table_name = crate::schema::keychains)]
+#[diesel(table_name = keychains)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct NewKeychain<'a> {
     pub name: &'a String,
 }
 
 #[derive(Debug, AsChangeset)]
-#[diesel(table_name = crate::schema::keychains)]
+#[diesel(table_name = keychains)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct UpdateKeychain<'a> {
     pub id: &'a i32,
     pub name: &'a String,
-    pub updated_at: Option<NaiveDateTime>,
+    pub updated_at: NaiveDateTime,
 }

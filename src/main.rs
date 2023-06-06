@@ -1,35 +1,31 @@
 mod args;
-mod db;
-mod models;
-mod schema;
-mod ops;
-
+mod store;
 use args::{KeychainArgs, Command};
 use clap::Parser;
-use crate::ops::keychain_ops::{
-    create_keychain, 
-    update_keychain, 
-    list_keychains,
-    delete_keychain
+use store::{
+    store::Store,
+    models::{NewKeychain, UpdateKeychain},
 };
-use models::{NewKeychain, UpdateKeychain};
+use chrono::offset::Local;
+
 
 fn main() {
+    let store = Store::new();
     let _args = KeychainArgs::parse();
     match &_args.command {
         Command::Create { name } => {
-            create_keychain(NewKeychain { name })
+            store.keychains.create(NewKeychain { name });
         }
         Command::Update {id, name} => {
-            update_keychain(UpdateKeychain { id, name, 
-                updated_at: Some(chrono::offset::Local::now().naive_local()) ,
+            store.keychains.update(UpdateKeychain { id, name, 
+                updated_at: Local::now().naive_local() ,
             })
         }
         Command::List {} => {
-            list_keychains()
+            store.keychains.list()
         }
         Command::Delete { name } => {
-            delete_keychain(name.to_string())
+            store.keychains.delete(name.to_string())
         }
     }
 }
