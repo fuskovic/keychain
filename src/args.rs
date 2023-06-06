@@ -13,18 +13,18 @@ pub struct KeychainArgs {
 
 #[derive(Debug, Subcommand)]
 pub enum Command {
-    // Create a new keychain
+    /// Create a new keychain
     Create {
         name: String,
     },
-    // List existing keychains
+    /// List existing keychains
     List{},
-    // Update/rename existing keychain
+    /// Update/rename existing keychain
     Update {
         id:     i32,
         name:   String,
     },
-    // Delete an existing keychain
+    /// Delete an existing keychain
     Delete {
         name: String,
     }
