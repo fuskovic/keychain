@@ -7,7 +7,7 @@ use store::{
     models::{NewKeychain, UpdateKeychain},
 };
 use chrono::offset::Local;
-
+extern crate diesel_migrations;
 
 fn main() {
     let store = Store::new();

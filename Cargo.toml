@@ -8,7 +8,9 @@ edition = "2021"
 chrono = "0.4.26"
 clap = { version = "4.3.1", features = ["derive"] }
 diesel = { version = "2.1.0", features = ["sqlite", "chrono"] }
+diesel_migrations = "2.1.0"
 dotenvy = "0.15.7"
+home = "0.5.5"
 time = "0.3.21"
 
 [[bin]]
