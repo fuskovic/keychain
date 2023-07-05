@@ -30,7 +30,6 @@ impl KeychainStore {
     
     pub fn list(mut self) {
         let chains = keychains.load::<Keychain>(&mut self.conn).unwrap();
-        chains.with_title();
         let _ = print_stdout(chains.with_title());
     }
     
