@@ -16,12 +16,11 @@ impl Store {
         let config_dir = Path::new(&home_dir().unwrap())
             .join(".config");
 
-        match fs::create_dir_all(&config_dir){
-            Ok(_) => {},
-            Err(err) => {
-                panic!("Configuration error: {:?}", err)
-            },
-        };
+        fs::create_dir_all(&config_dir).unwrap_or_else(
+            |err| panic!(
+                "Configuration error: {:?}", err,
+            ),
+        );
 
         let db_url = Path::new(&config_dir).join("krs.db");
         let db_url_str = db_url.to_str().unwrap();
