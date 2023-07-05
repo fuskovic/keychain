@@ -7,6 +7,7 @@ edition = "2021"
 [dependencies]
 chrono = "0.4.26"
 clap = { version = "4.3.1", features = ["derive"] }
+cli-table = "0.4.7"
 diesel = { version = "2.1.0", features = ["sqlite", "chrono"] }
 diesel_migrations = "2.1.0"
 dotenvy = "0.15.7"

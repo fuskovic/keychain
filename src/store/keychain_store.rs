@@ -3,6 +3,7 @@ use crate::{
     store::models::{NewKeychain, Keychain, UpdateKeychain}, 
     store::schema::keychains::{dsl::keychains, name},
 };
+use cli_table::{print_stdout, WithTitle};
 
 pub struct KeychainStore {
     conn: SqliteConnection,
@@ -28,8 +29,9 @@ impl KeychainStore {
     }
     
     pub fn list(mut self) {
-        let results = keychains.load::<Keychain>(&mut self.conn);
-        println!("{:?}", results);
+        let chains = keychains.load::<Keychain>(&mut self.conn).unwrap();
+        chains.with_title();
+        let _ = print_stdout(chains.with_title());
     }
     
     pub fn delete(mut self, _name: String) {

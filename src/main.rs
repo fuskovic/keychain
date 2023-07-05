@@ -8,6 +8,7 @@ use store::{
 };
 use chrono::offset::Local;
 extern crate diesel_migrations;
+extern crate cli_table;
 
 fn main() {
     let store = Store::new();
