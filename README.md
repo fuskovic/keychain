@@ -12,7 +12,6 @@ Currently just a WIP side project for test-driving [clap](https://github.com/cla
 
     git clone https://github.com/fuskovic/keychain.git
     cd keychain
-    echo DATABASE_URL=path/you/want/the/sqlite/file/to/live/at.db > .env
     cargo install --path .
 
 ## Verify install
