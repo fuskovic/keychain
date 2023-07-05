@@ -33,7 +33,8 @@ impl Store {
             );
 
         run_migrations(&mut conn)
-            .unwrap_or_else(|err| panic! (
+            .unwrap_or_else(
+                |err| panic! (
                 "failed to apply migrations: {}", err,
             ),
         );
