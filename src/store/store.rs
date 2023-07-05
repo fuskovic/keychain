@@ -18,7 +18,7 @@ impl Store {
 
         fs::create_dir_all(&config_dir).unwrap_or_else(
             |err| panic!(
-                "Configuration error: {:?}", err,
+                "failed to create {} : {}", &config_dir.to_str().unwrap(), err,
             ),
         );
 
