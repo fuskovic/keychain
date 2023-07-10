@@ -15,11 +15,9 @@ impl KeychainStore {
     }
 
     pub fn create(mut self, kc: NewKeychain) {
-        let result = diesel::insert_into(keychains)
+        match diesel::insert_into(keychains)
             .values(&kc)
-            .execute(&mut self.conn);
-        
-        match result {
+            .execute(&mut self.conn) {
             Ok(_) => { 
                 println!("successfully created {}", kc.name) 
             },
@@ -30,11 +28,9 @@ impl KeychainStore {
     }
     
     pub fn update(mut self, kc: UpdateKeychain) {
-        let result = diesel::update(keychains.find(kc.id))
+        match diesel::update(keychains.find(kc.id))
             .set(&kc)
-            .execute(&mut self.conn);
-
-        match result {
+            .execute(&mut self.conn) {
             Ok(rows_affected) => {
                 if rows_affected == 0 {
                     println!("{} not found", kc.name)
@@ -54,10 +50,8 @@ impl KeychainStore {
     }
     
     pub fn delete(mut self, _name: String) {
-        let result = diesel::delete(keychains.filter(name.eq(&_name)))
-            .execute(&mut self.conn);
-
-        match result {
+        match diesel::delete(keychains.filter(name.eq(&_name)))
+            .execute(&mut self.conn) {
             Ok(rows_affected) => {
                 if rows_affected == 0 {
                     println!("{} not found", _name)
