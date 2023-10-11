@@ -57,12 +57,11 @@ pub enum KeyCommands {
     List{
         keychain_id: i32,
     },
-    // /// Update/rename existing keychain
-    // Update {
-    //     id:     i32,
-    //     key_name: String,
-    //     key_value: String,
-    // },
+    /// Update/rename existing keychain
+    Update {
+        id:     i32,
+        key_value: String,
+    },
     // /// Delete an existing key
     // Delete {
     //     id: i32,

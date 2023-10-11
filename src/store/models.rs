@@ -67,7 +67,6 @@ pub struct NewKey<'a> {
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct UpdateKey<'a> {
     pub id: &'a i32,
-    pub name: &'a String,
     pub value: &'a String,
     pub updated_at: NaiveDateTime,
 }

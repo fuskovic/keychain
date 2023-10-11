@@ -1,10 +1,20 @@
 mod args;
 mod store;
-use args::{Cli, Commands, KeyCommands, KeysArgs};
+use args::{
+    Cli, 
+    Commands, 
+    KeyCommands, 
+};
+
 use clap::Parser;
 use store::{
     store::Store,
-    models::{NewKeychain, UpdateKeychain, NewKey},
+    models::{
+        NewKeychain, 
+        UpdateKeychain, 
+        NewKey, 
+        UpdateKey,
+    },
 };
 use chrono::offset::Local;
 extern crate diesel_migrations;
@@ -44,6 +54,13 @@ fn main() {
                 }
                 KeyCommands::List { keychain_id } => {
                     store.keys.list(*keychain_id)
+                }
+                KeyCommands::Update {id, key_value} => {
+                    store.keys.update(UpdateKey{ 
+                        id, 
+                        value: key_value, 
+                        updated_at: Local::now().naive_local()
+                    })
                 }
             }
         }

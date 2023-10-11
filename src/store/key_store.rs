@@ -33,13 +33,13 @@ impl KeyStore {
             .execute(&mut self.conn) {
             Ok(rows_affected) => {
                 if rows_affected == 0 {
-                    println!("{} not found", k.name)
+                    println!("key id {} not found", k.id)
                 } else {
-                    println!("successfully updated {}", k.name)
+                    println!("successfully updated key id {}", k.id)
                 }
             },
             Err(err) => {
-                println!("failed to update {}: {}", k.name, err)
+                println!("failed to update key id {}: {}", k.id, err)
             }
         };
     }
