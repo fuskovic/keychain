@@ -1,7 +1,7 @@
 use diesel::prelude::*;
 use crate::{
     store::models::{NewKey, Key, UpdateKey}, 
-    store::schema::keys::{dsl::keys, name, keychain_id},
+    store::schema::keys::{dsl::keys, id, keychain_id},
 };
 use cli_table::{print_stdout, WithTitle};
 
@@ -52,18 +52,18 @@ impl KeyStore {
         let _ = print_stdout(chain_keys.with_title());
     }
     
-    pub fn delete(mut self, _name: String) {
-        match diesel::delete(keys.filter(name.eq(&_name)))
+    pub fn delete(mut self, key_id: i32) {
+        match diesel::delete(keys.filter(id.eq(&key_id)))
             .execute(&mut self.conn) {
             Ok(rows_affected) => {
                 if rows_affected == 0 {
-                    println!("{} not found", _name)
+                    println!("key id {} not found", key_id)
                 } else {
-                    println!("successfully deleted {}", _name)
+                    println!("successfully deleted key id {}", key_id)
                 }
             },
             Err(err) => {
-                println!("failed to delete {}: {}", _name, err)
+                println!("failed to delete key id {}: {}", key_id, err)
             }
         };
     }

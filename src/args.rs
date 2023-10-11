@@ -62,8 +62,8 @@ pub enum KeyCommands {
         id:     i32,
         key_value: String,
     },
-    // /// Delete an existing key
-    // Delete {
-    //     id: i32,
-    // }
+    /// Delete an existing key
+    Delete {
+        id: i32,
+    }
 }

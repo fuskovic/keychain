@@ -62,6 +62,9 @@ fn main() {
                         updated_at: Local::now().naive_local()
                     })
                 }
+                KeyCommands::Delete { id } => {
+                    store.keys.delete(*id)
+                }
             }
         }
     }
