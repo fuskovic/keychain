@@ -1,7 +1,7 @@
 use diesel::prelude::*;
 use crate::{
     store::models::{NewKey, Key, UpdateKey}, 
-    store::schema::keys::{dsl::keys, name},
+    store::schema::keys::{dsl::keys, name, keychain_id},
 };
 use cli_table::{print_stdout, WithTitle};
 
@@ -44,9 +44,12 @@ impl KeyStore {
         };
     }
     
-    pub fn list(mut self) {
-        let chains = keys.load::<Key>(&mut self.conn).unwrap();
-        let _ = print_stdout(chains.with_title());
+    pub fn list(mut self, chain_id: i32) {
+        let chain_keys = keys.
+            filter(keychain_id.eq(chain_id))
+            .load::<Key>(&mut self.conn)
+            .unwrap();
+        let _ = print_stdout(chain_keys.with_title());
     }
     
     pub fn delete(mut self, _name: String) {
