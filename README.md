@@ -28,6 +28,7 @@ Commands:
   list    List existing keychains
   update  Update/rename existing keychain
   delete  Delete an existing keychain
+  keys    Subcommand for managing keychain keys
   help    Print this message or the help of the given subcommand(s)
 
 Options:
